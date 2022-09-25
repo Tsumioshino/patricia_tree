@@ -16,9 +16,11 @@ class Patricia {
         bool ComecaCom (const std::string&, const std::string&);
         NodeApd getRaiz(){return raiz;};
         void setRaiz(NodeApd node) {raiz = node;}
-        void Lista();
         void setContador(bool resp) {contador = resp;};
         bool getContador(){return contador;};
+        void Lista();
+        void Lista_aux(NodeApd, std::string);
+        NodeApd busca(std::string);
 };
 
 class Node {

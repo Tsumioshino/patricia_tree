@@ -1,5 +1,7 @@
 #include <iostream>
 #include "Patricia.hpp"
+#include <queue>
+
 using namespace std;
 
 bool Patricia::insere(string prefixo){
@@ -82,6 +84,20 @@ bool Patricia::insereRec(string prefixo, NodeApd node){
     }
 }
 
+void Patricia::Lista(){
+    Lista_aux(getRaiz(), "");
+
+}
+
+void Patricia::Lista_aux(NodeApd node, string prefixo){
+    if (node->isFolha()){
+        cout << prefixo << node->getPrefixo() << endl;
+    } else {
+        Lista_aux(node->getFilhoEsquerda(), prefixo + node->getPrefixo());
+        Lista_aux(node->getFilhoDireita(), prefixo + node->getPrefixo());
+    }
+}
+
 // calcula o indice de divergencia
 unsigned int Patricia::AchaNivel (const std::string& k1, const std::string& k2) {
     const char *p0 = k1.c_str();
@@ -120,8 +136,9 @@ int main(int argc, char const *argv[]) {
     pat.insere(palavra1);
     pat.insere(palavra2);
     pat.insere(palavra3);
-    cout << pat.getContador() << endl;
     pat.insere(palavra4);
+    pat.Lista();
+    /*
     cout << pat.getRaiz()->getPrefixo() << pat.getRaiz()->getLetra() << endl;
     cout << pat.getRaiz()->getFilhoEsquerda()->getPrefixo() << endl;
     cout << pat.getRaiz()->getFilhoEsquerda()->getFilhoEsquerda()->getPrefixo() << endl;
@@ -129,7 +146,6 @@ int main(int argc, char const *argv[]) {
     cout << pat.getRaiz()->getFilhoEsquerda()->getFilhoDireita()->getFilhoEsquerda()->getPrefixo() << endl;
     cout << pat.getRaiz()->getFilhoEsquerda()->getFilhoDireita()->getFilhoDireita()->getPrefixo() << endl;
     cout << pat.getRaiz()->getFilhoDireita()->getPrefixo() << endl;
-    /*
     pat.insere("bbcdef");
     cout << pat.getRaiz()->getFilhoDireita()->getPrefixo() << endl;
     int divergencia = pat.AchaNivel(palavra1, palavra);
