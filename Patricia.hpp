@@ -6,6 +6,8 @@ typedef struct Patricia *PatriciaApd;
 typedef struct Node *NodeApd;
 
 class Patricia {
+    private:
+        void Lista_aux(NodeApd, std::string);
     protected:
         NodeApd raiz = nullptr;
         bool contador = true;
@@ -19,7 +21,6 @@ class Patricia {
         void setContador(bool resp) {contador = resp;};
         bool getContador(){return contador;};
         void Lista();
-        void Lista_aux(NodeApd, std::string);
         NodeApd busca(std::string);
 };
 

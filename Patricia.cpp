@@ -85,8 +85,8 @@ bool Patricia::insereRec(string prefixo, NodeApd node){
 }
 
 void Patricia::Lista(){
+    cout << "Lista dos elementos na Patricia" << endl;
     Lista_aux(getRaiz(), "");
-
 }
 
 void Patricia::Lista_aux(NodeApd node, string prefixo){
