@@ -1,14 +1,18 @@
 #include <iostream>
 #include "Patricia.hpp"
+#include <fstream>
 #include <sstream>
+
 
 using namespace std;
 
 bool Patricia::insere(string prefixo){
     if (getRaiz() == nullptr) {
-        cout << "raiz == nullprt" << endl;
+        //cout << "raiz == nullprt" << endl;
         setRaiz(new Node());
         raiz->setPrefixo(prefixo);
+        raiz->setId(1);
+        raiz->setNivel(1);
         return true;
     } else {
         return insereRec(prefixo, getRaiz());
@@ -20,12 +24,14 @@ bool Patricia::insereRec(string prefixo, NodeApd node){
     int divergencia = AchaNivel(prefixo, node->getPrefixo());
     if (node->isFolha()) {
         if (node->getPrefixo() == prefixo){
-            cout << "prefixo == node->prefixo" << endl;
+            //cout << "prefixo == node->prefixo" << endl;
             return false;
         } else {
-            cout << "prefixo != node->prefixo" << endl;
+            //cout << "prefixo != node->prefixo" << endl;
             // define o pai do no a direita
             Node* direita = new Node(node);
+            direita->setId((node->getId() + 1));
+            direita->setNivel(node->getNivel() + 1);
 
             // define o prefixo do nó a esquerda
             direita->setPrefixo(string(prefixo, divergencia));
@@ -42,6 +48,8 @@ bool Patricia::insereRec(string prefixo, NodeApd node){
             if (divergencia < node->getPrefixo().length()) {
                 // define o pai do no a esquerda
                 Node* esquerda = new Node(node);
+                esquerda->setId((direita->getId() + 1));
+                esquerda->setNivel(node->getNivel() + 1);
                 esquerda->setPrefixo(string(node->getPrefixo(), divergencia));
                 node->setFilhoEsquerda(esquerda);
             }
@@ -58,6 +66,8 @@ bool Patricia::insereRec(string prefixo, NodeApd node){
         /* busca no para inserir prefixo */
         if (divergencia == 0 && getContador()){
             Node* nova_raiz = new Node();
+            nova_raiz->setId(getRaiz()->getId() - 1);
+            nova_raiz->setNivel(getRaiz()->getNivel() - 1);
             Node* direita = new Node(nova_raiz); // define uma nova folha
             direita->setPrefixo(prefixo); // atribui o prefixo a folha
             nova_raiz->setLetra(getRaiz()->getPrefixo().c_str()[0]); // adiciona a letra divegente
@@ -71,7 +81,7 @@ bool Patricia::insereRec(string prefixo, NodeApd node){
             setRaiz(nova_raiz); // define a nova raiz como raiz
             return true;
         } else if (!getContador() && divergencia == 0) {
-            cout << "Error: insert" << endl;
+            //cout << "Error: insert" << endl;
             return false;
         } else if (prefixo.c_str()[divergencia] == node->getLetra()) {
             /* vai pra esquerda se node->prefix = bcd e novo prefix = abc*/
@@ -109,7 +119,8 @@ void Patricia::Lista(){
 }
 
 void Patricia::Lista_aux(NodeApd node, string prefixo){
-    if (node->isFolha()){
+    if (node->isTerminal()) {
+        cout << node->to_string() << endl;
         cout << prefixo << node->getPrefixo() << endl;
     } else {
         Lista_aux(node->getFilhoEsquerda(), prefixo + node->getPrefixo());
@@ -126,7 +137,7 @@ unsigned int Patricia::AchaNivel (const std::string& k1, const std::string& k2) 
         p1++; p2++;
     }
     unsigned int nivel = p1-p0;
-    std::cout << " AchaNivel: k1=" << k1 << " k2=" << k2 << " nivel=" << nivel << std::endl;
+    //std::cout << " AchaNivel: k1=" << k1 << " k2=" << k2 << " nivel=" << nivel << std::endl;
     return (nivel);
 }
 
@@ -144,27 +155,37 @@ bool Patricia::ComecaCom (const std::string& s1, const std::string& pre) {
     }
 }
 
-string GeraDot(void) {
-    std::stringstream definicoes, ligacoes;
-    GeraDotAux(definicoes, ligacoes, raiz, 0, ' ');
 
-    std::stringstream tmp;
-    tmp << "digraph Teste {" << std::endl << " node [shape=record];" << std::endl;
-    tmp << definicoes.str();
-    tmp << ligacoes.str();
-    tmp << "}" << std::endl;
-    return tmp.str();
+void Patricia::GeraDot() {
+    ofstream dot("image.dot", std::ofstream::out);
+    stringstream texto;
+    GeraDotAux(getRaiz(), texto);
+    dot << "digraph Teste {" << std::endl << " node [shape=record];" << std::endl;
+    dot << texto.str();
+    dot << "}" << std::endl;
+    dot.close();
 }
 
+void Patricia::GeraDotAux(NodeApd node, stringstream& texto){
+    if (node->isFolha()){
+        texto << "no" << to_string(node->getId()) << " [shape=ellipse, label=\"" <<  node->getPrefixo() << "\"];" << endl;
+    } else {
+        texto << "no" << node->getId() << " [label=\"{<f0> " << node->getNivel() << "| <f1> " << node->getPrefixo() <<  "| {" << "}}\"];" << std::endl;;
+        GeraDotAux(node->getFilhoEsquerda(), texto);
+        GeraDotAux(node->getFilhoDireita(), texto);
+    }
+}
+
+/*
 void GeraDotAux(std::stringstream& definicoes, std::stringstream& ligacoes, NodeApd no, unsigned int pai, char pai_char) {
     if (!no) return;
     if (no->isFolha()) {
         NodeApd tmp = no;
-        definicoes << "no" << tmp->id << " [shape=ellipse, label=\"" << tmp->payload->chave << "\"];" << std::endl;
+        definicoes << "no" << tmp->getId() << " [shape=ellipse, label=\"" << tmp->getId() << "\"];" << std::endl;
     }
-    if (no->isInterno()) {
-        NodeInterno* tmp = (NodeInterno*) no.get();
-        definicoes << "no" << tmp->id << " [label=\"{<f0> " << tmp->nivel << "| <f1> " << tmp->prefixo <<  "| {";
+    if (!no->isFolha()) {
+        NodeApd tmp = no;
+        definicoes << "no" << tmp->getId() << " [label=\"{<f0> " << tmp->getId() << "| <f1> " << tmp->getPrefixo() <<  "| {";
         bool virgula = false;
         for (char i='a'; i <= 'z'; i++) {
             if (tmp->ponteiros[i-'a']) {
@@ -185,7 +206,7 @@ void GeraDotAux(std::stringstream& definicoes, std::stringstream& ligacoes, Node
     }
 }
 
-
+*/
 int main(int argc, char const *argv[]) {
     Patricia pat;
     string palavra = "cascolho";
@@ -198,9 +219,11 @@ int main(int argc, char const *argv[]) {
     pat.insere(palavra2);
     pat.insere(palavra3);
     pat.insere(palavra4);
+    pat.insere("caceta");
     pat.Lista();
-    cout << pat.busca(palavra) << endl;
     /*
+    pat.GeraDot();
+    cout << pat.busca(palavra) << endl;
     cout << pat.getRaiz()->getPrefixo() << pat.getRaiz()->getLetra() << endl;
     cout << pat.getRaiz()->getFilhoEsquerda()->getPrefixo() << endl;
     cout << pat.getRaiz()->getFilhoEsquerda()->getFilhoEsquerda()->getPrefixo() << endl;

@@ -9,6 +9,7 @@ class Patricia {
     private:
         void Lista_aux(NodeApd, std::string);
         NodeApd busca_aux(std::string, NodeApd);
+        void GeraDotAux(NodeApd, std::stringstream&);
     protected:
         NodeApd raiz = nullptr;
         bool contador = true;
@@ -23,6 +24,7 @@ class Patricia {
         bool getContador(){return contador;};
         void Lista();
         NodeApd busca(std::string);
+        void GeraDot();
 };
 
 class Node {
@@ -33,8 +35,10 @@ class Node {
         std::string prefixo;
         char letra_divergida;
         int divergencia;
+        int id;
         bool folha = true;
         bool terminal = true;
+        int nivel;
     public:
         Node() {folha = true; terminal = true;};
         Node(NodeApd node) {folha = true; terminal = true; pai = node;};
@@ -43,7 +47,7 @@ class Node {
         // Pergunta se um nó é folha
         bool isFolha() { return folha; };
         // Define um nó como terminal (true/false)
-        void setTerminal(bool terminal) {terminal = terminal;};
+        void setTerminal(bool resposta) {terminal = resposta;};
         // Pergunta se um nó é terminal
         bool isTerminal() { return terminal; };
         // Define um prefixo para o no
@@ -64,6 +68,17 @@ class Node {
         int getDivergencia() {return divergencia;};
         void setLetra(char letra){letra_divergida = letra;};
         char getLetra() {return letra_divergida;};
+        void setId(int i){id = i;};
+        int getId() {return id;};
+        void setNivel(int i){nivel = i;};
+        int getNivel() {return nivel;};
+        std::string to_string(){ 
+            if (pai != nullptr){
+                return (pai->to_string() + ("{" + prefixo + "}"));
+            } else {
+                return (prefixo);
+            }
+        };
 };
 
 #endif
