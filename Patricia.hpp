@@ -8,6 +8,7 @@ typedef struct Node *NodeApd;
 class Patricia {
     private:
         void Lista_aux(NodeApd, std::string);
+        NodeApd busca_aux(std::string, NodeApd);
     protected:
         NodeApd raiz = nullptr;
         bool contador = true;

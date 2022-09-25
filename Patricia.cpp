@@ -1,6 +1,6 @@
 #include <iostream>
 #include "Patricia.hpp"
-#include <queue>
+#include <sstream>
 
 using namespace std;
 
@@ -84,6 +84,25 @@ bool Patricia::insereRec(string prefixo, NodeApd node){
     }
 }
 
+NodeApd Patricia::busca(string prefixo){
+    return busca_aux(prefixo, getRaiz());
+}
+
+NodeApd Patricia::busca_aux(string prefixo, NodeApd node){
+    int divergencia = AchaNivel(prefixo, node->getPrefixo());
+    if (node->getPrefixo() == prefixo){
+        cout << "A palavra existe, e termina no terminal: " << node->getPrefixo() << endl;
+        return node;
+    } else if (prefixo.c_str()[divergencia] == node->getLetra()) {
+        /* vai pra esquerda se node->prefix = bcd e novo prefix = abc*/
+        return busca_aux(string(prefixo, divergencia, -1), node->getFilhoEsquerda());
+    } else {
+        /* vai pra direita */
+        /* vai pra direita se node->prefix = bcd e novo prefix = cbc*/
+        return busca_aux(string(prefixo, divergencia, -1), node->getFilhoDireita());
+    }
+}
+
 void Patricia::Lista(){
     cout << "Lista dos elementos na Patricia" << endl;
     Lista_aux(getRaiz(), "");
@@ -125,6 +144,48 @@ bool Patricia::ComecaCom (const std::string& s1, const std::string& pre) {
     }
 }
 
+string GeraDot(void) {
+    std::stringstream definicoes, ligacoes;
+    GeraDotAux(definicoes, ligacoes, raiz, 0, ' ');
+
+    std::stringstream tmp;
+    tmp << "digraph Teste {" << std::endl << " node [shape=record];" << std::endl;
+    tmp << definicoes.str();
+    tmp << ligacoes.str();
+    tmp << "}" << std::endl;
+    return tmp.str();
+}
+
+void GeraDotAux(std::stringstream& definicoes, std::stringstream& ligacoes, NodeApd no, unsigned int pai, char pai_char) {
+    if (!no) return;
+    if (no->isFolha()) {
+        NodeApd tmp = no;
+        definicoes << "no" << tmp->id << " [shape=ellipse, label=\"" << tmp->payload->chave << "\"];" << std::endl;
+    }
+    if (no->isInterno()) {
+        NodeInterno* tmp = (NodeInterno*) no.get();
+        definicoes << "no" << tmp->id << " [label=\"{<f0> " << tmp->nivel << "| <f1> " << tmp->prefixo <<  "| {";
+        bool virgula = false;
+        for (char i='a'; i <= 'z'; i++) {
+            if (tmp->ponteiros[i-'a']) {
+                if (virgula) definicoes << " | ";
+                 else virgula = true;
+                definicoes << "<f" << i << "> " << i;
+                ligacoes << "no" << tmp->id << ":f" << i << " -> no" << tmp->ponteiros[i-'a']->id << (tmp->ponteiros[i-'a']->isFolha() ? "" : ":f0") << ";" << std::endl;
+            }
+        }
+        definicoes << "}}\"];" << std::endl;
+
+        for (char i='a'; i <= 'z'; i++) {
+            if (tmp->ponteiros[i-'a']) {
+                GeraDotAux(definicoes, ligacoes, tmp->ponteiros[i-'a'], tmp->id, i);
+            }
+        }
+ 
+    }
+}
+
+
 int main(int argc, char const *argv[]) {
     Patricia pat;
     string palavra = "cascolho";
@@ -138,6 +199,7 @@ int main(int argc, char const *argv[]) {
     pat.insere(palavra3);
     pat.insere(palavra4);
     pat.Lista();
+    cout << pat.busca(palavra) << endl;
     /*
     cout << pat.getRaiz()->getPrefixo() << pat.getRaiz()->getLetra() << endl;
     cout << pat.getRaiz()->getFilhoEsquerda()->getPrefixo() << endl;
