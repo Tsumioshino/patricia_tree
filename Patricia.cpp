@@ -21,7 +21,12 @@ bool Patricia::insere(string prefixo){
 }
 
 bool Patricia::insereRec(string prefixo, NodeApd node){
-    int divergencia = AchaNivel(prefixo, node->getPrefixo());
+    int divergencia;
+    if (node->getPrefixo().length() == 1) {
+        divergencia = 1;
+    } else {
+        divergencia = AchaNivel(prefixo, node->getPrefixo());
+    }
     if (node->isFolha()) {
         if (node->getPrefixo() == prefixo){
             //cout << "prefixo == node->prefixo" << endl;
@@ -214,12 +219,13 @@ int main(int argc, char const *argv[]) {
     string palavra2 = "cascalhe";
     string palavra3 = "bascalhe";
     string palavra4 = "vascalhe";
+    string palavra5 = "caceta";
     pat.insere(palavra);
     pat.insere(palavra1);
     pat.insere(palavra2);
     pat.insere(palavra3);
     pat.insere(palavra4);
-    pat.insere("caceta");
+    pat.insere(palavra5);
     pat.Lista();
     /*
     pat.GeraDot();

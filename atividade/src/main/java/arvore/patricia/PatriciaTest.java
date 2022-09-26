@@ -1,5 +1,7 @@
 package arvore.patricia;
 
+import javax.swing.JOptionPane;
+
 class PatriciaTest {
 
 	// Member variable of this class
@@ -7,7 +9,7 @@ class PatriciaTest {
 	// Maxbits can help us to store elements in the Trie
 	// The root helps us to fix a global value.
 	private PatriciaTrieNode root;
-	private static final int MaxBits = 10;
+	private static final int MaxBits = 64;
 
 	// Method 1
 	// PatriciaTrie where initially
@@ -153,6 +155,8 @@ class PatriciaTest {
 			// full
 
 			// Display message
+            JOptionPane.showMessageDialog(null, "O valor inserido ultrapassa o limite");
+
 			System.out.println(
 				"We are full, The number is too large");
 
@@ -213,8 +217,7 @@ class PatriciaTest {
 		// If we have the key already Present
 		if (element == lastNode.data) {
 			// Print the display message
-			System.out.println("Key already Present");
-
+            JOptionPane.showMessageDialog(null, "O valor inserido já foi adicionado");
 			// Return t
 			return t;
 		}
