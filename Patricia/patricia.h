@@ -13,7 +13,7 @@
 enum  TIPO: uint8_t {NODE=0, INTERNO=1, FOLHA=2};
 
 
-/* Lookup Tables para traduzir entre letras e posições dos ponteiros em NodeInterno, e vice-versa */
+/* Lookup Tables para traduzir entre letras e posições dos ponteiros em Interno, e vice-versa */
 namespace Traducao {
 /* Recebe uma letra (char) e devolve o inteiro correspondente nos ponteiros */
 const unsigned int Direta[] = {
@@ -91,24 +91,24 @@ typedef Node *NodeApd;
 
 
 /* Nó Interno, contendo ponteiros para outros nós */
-class NodeInterno : public Node {
+class Interno : public Node {
 public:
-    inline unsigned int NumFilhos(void) const;
+    inline unsigned int QtdFilhos(void) const;
     unsigned int nivel;
     NodeApd ponteiros[NUMARY] = {}; // Inicializa os ponteiros em nullptr
-    NodeInterno() : Node(TIPO::INTERNO) {};
-    NodeInterno(const std::string &c, int n) : Node(TIPO::INTERNO, c), nivel(n) {};
-    ~NodeInterno();
+    Interno() : Node(TIPO::INTERNO) {};
+    Interno(const std::string &c, int n) : Node(TIPO::INTERNO, c), nivel(n) {};
+    ~Interno();
     int Altura(void);
 };
 
 /* Nó Folha, contendo um payload */
-class NodeFolha : public Node {
+class Folha : public Node {
 private:
     PayLoad _payload;
 public:
-    NodeFolha(const std::string& c, const PayLoad& p) : Node(TIPO::FOLHA, c), _payload(p) {};
-    ~NodeFolha();
+    Folha(const std::string& c, const PayLoad& p) : Node(TIPO::FOLHA, c), _payload(p) {};
+    ~Folha();
     std::shared_ptr<PayLoad> payload(void) const {
         return std::make_shared<PayLoad>(_payload);
     }
@@ -137,7 +137,7 @@ private:
     inline static unsigned int AchaNivel (const std::string&, const std::string&);
 
     /* Verifica se a 1a string começa com a 2a string */
-    inline static bool ComecaCom (const std::string&, const std::string&);
+    inline static bool IniciaCom (const std::string&, const std::string&);
 
     /* Retorna a letra no nivel da string */
     inline static char AchaChar(const std::string &, unsigned int);

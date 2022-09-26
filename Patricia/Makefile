@@ -37,7 +37,7 @@ MOVE          = mv -f
 TAR           = tar -cf
 COMPRESS      = gzip -9f
 DISTNAME      = Patricia1.0.0
-DISTDIR = /mnt/1DCC18BD2A7894DB/alverad/Documentos/git/Patricia/qt/Patricia/.tmp/Patricia1.0.0
+DISTDIR = /mnt/1DCC18BD2A7894DB/alverad/Documentos/git/patricia_tree/Patricia/.tmp/Patricia1.0.0
 LINK          = g++
 LFLAGS        = -Wl,-O1 -pipe -O2 -flto=12 -fno-fat-lto-objects -fuse-linker-plugin -fPIC
 LIBS          = $(SUBLIBS) /usr/lib/libQt5Widgets.so /usr/lib/libQt5Gui.so /usr/lib/libQt5Core.so -lGL -lpthread   
@@ -771,34 +771,34 @@ moc_mainwindow.cpp: mainwindow.h \
 		resultadobusca.h \
 		moc_predefs.h \
 		/usr/bin/moc
-	/usr/bin/moc $(DEFINES) --include /mnt/1DCC18BD2A7894DB/alverad/Documentos/git/Patricia/qt/Patricia/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/mnt/1DCC18BD2A7894DB/alverad/Documentos/git/Patricia/qt/Patricia -I/usr/include/qt -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtCore -I/usr/include/c++/12.2.0 -I/usr/include/c++/12.2.0/x86_64-pc-linux-gnu -I/usr/include/c++/12.2.0/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/12.2.0/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/12.2.0/include-fixed -I/usr/include mainwindow.h -o moc_mainwindow.cpp
+	/usr/bin/moc $(DEFINES) --include /mnt/1DCC18BD2A7894DB/alverad/Documentos/git/patricia_tree/Patricia/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/mnt/1DCC18BD2A7894DB/alverad/Documentos/git/patricia_tree/Patricia -I/usr/include/qt -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtCore -I/usr/include/c++/12.2.0 -I/usr/include/c++/12.2.0/x86_64-pc-linux-gnu -I/usr/include/c++/12.2.0/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/12.2.0/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/12.2.0/include-fixed -I/usr/include mainwindow.h -o moc_mainwindow.cpp
 
 moc_dialog_about.cpp: dialog_about.h \
 		moc_predefs.h \
 		/usr/bin/moc
-	/usr/bin/moc $(DEFINES) --include /mnt/1DCC18BD2A7894DB/alverad/Documentos/git/Patricia/qt/Patricia/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/mnt/1DCC18BD2A7894DB/alverad/Documentos/git/Patricia/qt/Patricia -I/usr/include/qt -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtCore -I/usr/include/c++/12.2.0 -I/usr/include/c++/12.2.0/x86_64-pc-linux-gnu -I/usr/include/c++/12.2.0/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/12.2.0/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/12.2.0/include-fixed -I/usr/include dialog_about.h -o moc_dialog_about.cpp
+	/usr/bin/moc $(DEFINES) --include /mnt/1DCC18BD2A7894DB/alverad/Documentos/git/patricia_tree/Patricia/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/mnt/1DCC18BD2A7894DB/alverad/Documentos/git/patricia_tree/Patricia -I/usr/include/qt -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtCore -I/usr/include/c++/12.2.0 -I/usr/include/c++/12.2.0/x86_64-pc-linux-gnu -I/usr/include/c++/12.2.0/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/12.2.0/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/12.2.0/include-fixed -I/usr/include dialog_about.h -o moc_dialog_about.cpp
 
 moc_mostradot.cpp: mostradot.h \
 		moc_predefs.h \
 		/usr/bin/moc
-	/usr/bin/moc $(DEFINES) --include /mnt/1DCC18BD2A7894DB/alverad/Documentos/git/Patricia/qt/Patricia/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/mnt/1DCC18BD2A7894DB/alverad/Documentos/git/Patricia/qt/Patricia -I/usr/include/qt -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtCore -I/usr/include/c++/12.2.0 -I/usr/include/c++/12.2.0/x86_64-pc-linux-gnu -I/usr/include/c++/12.2.0/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/12.2.0/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/12.2.0/include-fixed -I/usr/include mostradot.h -o moc_mostradot.cpp
+	/usr/bin/moc $(DEFINES) --include /mnt/1DCC18BD2A7894DB/alverad/Documentos/git/patricia_tree/Patricia/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/mnt/1DCC18BD2A7894DB/alverad/Documentos/git/patricia_tree/Patricia -I/usr/include/qt -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtCore -I/usr/include/c++/12.2.0 -I/usr/include/c++/12.2.0/x86_64-pc-linux-gnu -I/usr/include/c++/12.2.0/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/12.2.0/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/12.2.0/include-fixed -I/usr/include mostradot.h -o moc_mostradot.cpp
 
 moc_benchmark.cpp: benchmark.h \
 		patricia.h \
 		moc_predefs.h \
 		/usr/bin/moc
-	/usr/bin/moc $(DEFINES) --include /mnt/1DCC18BD2A7894DB/alverad/Documentos/git/Patricia/qt/Patricia/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/mnt/1DCC18BD2A7894DB/alverad/Documentos/git/Patricia/qt/Patricia -I/usr/include/qt -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtCore -I/usr/include/c++/12.2.0 -I/usr/include/c++/12.2.0/x86_64-pc-linux-gnu -I/usr/include/c++/12.2.0/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/12.2.0/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/12.2.0/include-fixed -I/usr/include benchmark.h -o moc_benchmark.cpp
+	/usr/bin/moc $(DEFINES) --include /mnt/1DCC18BD2A7894DB/alverad/Documentos/git/patricia_tree/Patricia/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/mnt/1DCC18BD2A7894DB/alverad/Documentos/git/patricia_tree/Patricia -I/usr/include/qt -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtCore -I/usr/include/c++/12.2.0 -I/usr/include/c++/12.2.0/x86_64-pc-linux-gnu -I/usr/include/c++/12.2.0/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/12.2.0/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/12.2.0/include-fixed -I/usr/include benchmark.h -o moc_benchmark.cpp
 
 moc_resultadobusca.cpp: resultadobusca.h \
 		patricia.h \
 		moc_predefs.h \
 		/usr/bin/moc
-	/usr/bin/moc $(DEFINES) --include /mnt/1DCC18BD2A7894DB/alverad/Documentos/git/Patricia/qt/Patricia/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/mnt/1DCC18BD2A7894DB/alverad/Documentos/git/Patricia/qt/Patricia -I/usr/include/qt -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtCore -I/usr/include/c++/12.2.0 -I/usr/include/c++/12.2.0/x86_64-pc-linux-gnu -I/usr/include/c++/12.2.0/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/12.2.0/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/12.2.0/include-fixed -I/usr/include resultadobusca.h -o moc_resultadobusca.cpp
+	/usr/bin/moc $(DEFINES) --include /mnt/1DCC18BD2A7894DB/alverad/Documentos/git/patricia_tree/Patricia/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/mnt/1DCC18BD2A7894DB/alverad/Documentos/git/patricia_tree/Patricia -I/usr/include/qt -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtCore -I/usr/include/c++/12.2.0 -I/usr/include/c++/12.2.0/x86_64-pc-linux-gnu -I/usr/include/c++/12.2.0/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/12.2.0/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/12.2.0/include-fixed -I/usr/include resultadobusca.h -o moc_resultadobusca.cpp
 
 moc_gerandodot.cpp: gerandodot.h \
 		moc_predefs.h \
 		/usr/bin/moc
-	/usr/bin/moc $(DEFINES) --include /mnt/1DCC18BD2A7894DB/alverad/Documentos/git/Patricia/qt/Patricia/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/mnt/1DCC18BD2A7894DB/alverad/Documentos/git/Patricia/qt/Patricia -I/usr/include/qt -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtCore -I/usr/include/c++/12.2.0 -I/usr/include/c++/12.2.0/x86_64-pc-linux-gnu -I/usr/include/c++/12.2.0/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/12.2.0/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/12.2.0/include-fixed -I/usr/include gerandodot.h -o moc_gerandodot.cpp
+	/usr/bin/moc $(DEFINES) --include /mnt/1DCC18BD2A7894DB/alverad/Documentos/git/patricia_tree/Patricia/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/mnt/1DCC18BD2A7894DB/alverad/Documentos/git/patricia_tree/Patricia -I/usr/include/qt -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtCore -I/usr/include/c++/12.2.0 -I/usr/include/c++/12.2.0/x86_64-pc-linux-gnu -I/usr/include/c++/12.2.0/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/12.2.0/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/12.2.0/include-fixed -I/usr/include gerandodot.h -o moc_gerandodot.cpp
 
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
